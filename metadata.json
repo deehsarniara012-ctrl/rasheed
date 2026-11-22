@@ -1,0 +1,6 @@
+{
+  "name": "GAZVA Vision Guard",
+  "description": "Real-time sub-second camera object detection with customizable Positive and Negative classification rules and instant audio warning siren.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
