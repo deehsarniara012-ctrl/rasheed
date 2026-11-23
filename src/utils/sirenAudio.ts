@@ -182,3 +182,24 @@ class SirenEngine {
 }
 
 export const sirenEngine = new SirenEngine();
+
+let lastSpokenAt = 0;
+
+export function speakTacticalAlert(message: string): void {
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+  if (sirenEngine.isMuted()) return;
+  const now = Date.now();
+  if (now - lastSpokenAt < 6500) return;
+  lastSpokenAt = now;
+  try {
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(message);
+    utter.rate = 1.08;
+    utter.pitch = 1.0;
+    utter.volume = 0.95;
+    window.speechSynthesis.speak(utter);
+  } catch {
+    // Ignore speech synthesis restrictions
+  }
+}
+
